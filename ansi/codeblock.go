@@ -2,6 +2,7 @@ package ansi
 
 import (
 	"io"
+	"os"
 	"sync"
 
 	"github.com/alecthomas/chroma/v2"
@@ -123,9 +124,13 @@ func (e *CodeBlockElement) Render(w io.Writer, ctx RenderContext) error {
 	})
 
 	if len(theme) > 0 {
+		formatter := "terminal256"
+		if formatterEnv := os.Getenv("CHROMA_FORMATTER"); formatterEnv != "" {
+			formatter = formatterEnv
+		}
 		renderText(iw, ctx.options.ColorProfile, bs.Current().Style.StylePrimitive, rules.BlockPrefix)
 
-		err := quick.Highlight(iw, e.Code, e.Language, "terminal256", theme)
+		err := quick.Highlight(iw, e.Code, e.Language, formatter, theme)
 		if err != nil {
 			return err
 		}

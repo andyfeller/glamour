@@ -14,6 +14,8 @@ const (
 
 // Default styles.
 const (
+	AnsiDarkStyle   = "ansi-dark"
+	AnsiLightStyle  = "ansi-light"
 	AsciiStyle      = "ascii"
 	AutoStyle       = "auto"
 	DarkStyle       = "dark"
@@ -668,6 +670,10 @@ var (
 		// Popular themes
 		DraculaStyle:    &DraculaStyleConfig,
 		TokyoNightStyle: &TokyoNightStyleConfig,
+
+		// ANSI themes
+		AnsiDarkStyle:  &ANSIDarkStyleConfig,
+		AnsiLightStyle: &ANSILightStyleConfig,
 	}
 )
 
