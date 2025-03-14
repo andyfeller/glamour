@@ -22,6 +22,7 @@ type Options struct {
 	ColorProfile     termenv.Profile
 	Styles           StyleConfig
 	ChromaFormatter  string
+	TableWrap        bool
 }
 
 // ANSIRenderer renders markdown content as ANSI escaped sequences.

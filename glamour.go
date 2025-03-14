@@ -21,8 +21,9 @@ import (
 )
 
 const (
-	defaultWidth = 80
-	highPriority = 1000
+	defaultWidth     = 80
+	highPriority     = 1000
+	defaultTableWrap = true
 )
 
 // A TermRendererOption sets an option on a TermRenderer.
@@ -78,6 +79,7 @@ func NewTermRenderer(options ...TermRendererOption) (*TermRenderer, error) {
 		ansiOptions: ansi.Options{
 			WordWrap:     defaultWidth,
 			ColorProfile: termenv.TrueColor,
+			TableWrap:    defaultTableWrap,
 		},
 	}
 	for _, o := range options {
@@ -224,6 +226,14 @@ func WithOptions(options ...TermRendererOption) TermRendererOption {
 				return err
 			}
 		}
+		return nil
+	}
+}
+
+// WithTableWrap sets a TermRenderer's table wrapping.
+func WithTableWrap(wrap bool) TermRendererOption {
+	return func(tr *TermRenderer) error {
+		tr.ansiOptions.TableWrap = wrap
 		return nil
 	}
 }
